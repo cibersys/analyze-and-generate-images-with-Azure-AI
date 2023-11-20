@@ -1,17 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
+// Components
+import SearchInput from './components/SearchInput';
+import DisplayResults from './components/DisplayResults';
+// Custom Hooks
+import { useFetchComputerVision } from './hooks/useFetchComputerVision';
+// Helpers
+import { validateUrl } from './utils/validate-url';
+
 
 function App() {
 
+  const [searchText, setSearchText] = useState('');  
+  const [url, setUrl] = useState('');
+
+  const { data, error, loading } = useFetchComputerVision(url);
+
+  const handleAnalyzeUrl = (e) => {
+    e.preventDefault();
+
+    const url = searchText?.trim();
+    if (!url || !validateUrl(url)) {
+      alert('Invalid URL!');
+      return;
+    }
+
+    setUrl(url);
+
+  }
+
+
   return (
-    <div>
+    <>
       <h1>Computer Vision</h1>
-      <label>Insert URL or type prompt:</label>
+      <SearchInput
+        value={searchText}
+        onChange={newText => setSearchText(newText)} />
       <br/>
-      <input className="w-100" type="text" placeholder="Enter URL to analyze or textual prompt to generate an image" />
-      <br/>
-      <button>Analyze</button>
+      <button onClick={ handleAnalyzeUrl }>Analyze</button>
       <button className="pl mt">Generate</button>
-    </div>
+      <br/>
+      
+      { loading && <p>Loading...</p> }
+
+      { error && <p>Error: {error.message}</p> }
+    
+      { data && <DisplayResults imgUrl={url} jsonResult={data} /> }
+    
+    </>
   );
 }
 
