@@ -31,18 +31,18 @@ function App() {
 
   return (
     <>
-      <h1>Computer Vision</h1>
+      <h1 className="title">Computer Vision</h1>
       <SearchInput
         value={searchText}
         onChange={newText => setSearchText(newText)} />
       <br/>
-      <button onClick={ handleAnalyzeUrl }>Analyze</button>
-      <button className="pl mt">Generate</button>
+      <button className="btn" onClick={ handleAnalyzeUrl }>Analyze</button>
+      <button className="pl mt btn">Generate</button>
       <br/>
       
-      { loading && <p>Loading...</p> }
+      { loading && <p className='animate__animated animate__flash'>Loading...</p> }
 
-      { error && <p>Error: {error.message}</p> }
+      { error && <p className="error">Error: {error.message}</p> }
     
       { data && <DisplayResults imgUrl={url} jsonResult={data} /> }
     

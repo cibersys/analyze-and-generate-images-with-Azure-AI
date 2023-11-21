@@ -4,10 +4,9 @@ import PropTypes from "prop-types";
 function SearchInput({ value, onChange }) {
   return (
     <>
-        <label>Insert URL or type prompt:</label>
+        <label className="subtitle">Insert URL or type prompt:</label>
         <br/>
-        <input 
-            className="w-100" 
+        <input
             type="text" 
             placeholder="Enter URL to analyze or textual prompt to generate an image"
             value={value}
