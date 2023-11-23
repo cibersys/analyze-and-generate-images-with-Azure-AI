@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function DisplayResults({ imgUrl, jsonResult }) {
+function DisplayResults({ title, imgUrl, jsonResult }) {
     return (
       <section>
         <hr/>
-        <h2>Computer Vision Analysis</h2>
+        <h2>{title}</h2>
         <img className="animate__animated animate__fadeIn" src={imgUrl} alt="img" width={'300px'} height={'300px'}/>
         <div>
-          { jsonResult && <pre>{JSON.stringify({'URL': imgUrl, ...jsonResult}, null, 2)}</pre>  } 
+          { jsonResult && <pre>{JSON.stringify(jsonResult, null, 2)}</pre> } 
         </div>
       </section>
     )
@@ -16,6 +16,7 @@ function DisplayResults({ imgUrl, jsonResult }) {
 
 // Props validation
 DisplayResults.propTypes = {
+    title: PropTypes.string.isRequired,
     imgUrl: PropTypes.string.isRequired,
     jsonResult: PropTypes.object.isRequired
 }
