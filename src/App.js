@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import SearchInput from './components/SearchInput';
 import DisplayResults from './components/DisplayResults';
+// Modules
+import { isConfigured } from './modules/azure-image-analysis';
+import { isConfigured as isConfiguredOpenAI } from './modules/openai-image-generation';
 // Custom Hooks
 import { useFetchComputerVision } from './hooks/useFetchComputerVision';
 import { useFetchOpenAIService } from './hooks/useFetchOpenAIService';
@@ -50,6 +53,13 @@ function App() {
 
     setOpenaiText(text);
 
+  }
+
+  /**
+   * Check if the API Keys are configured
+   */
+  if (!isConfigured() || !isConfiguredOpenAI()) {
+    return ( <p className="error">Key and/or endpoint not configured for congnitive services</p> );
   }
 
   return (

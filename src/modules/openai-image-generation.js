@@ -47,3 +47,9 @@ export const generateImage = async (text, n) => {
     return data;
 }
 
+/**
+ * Check if the OpenAI API Keys are configured
+ */
+export const isConfigured = () => {
+    return process.env.REACT_APP_OPENAI_API_KEY && process.env.REACT_APP_OPENAI_API_ENDPOINT;
+}

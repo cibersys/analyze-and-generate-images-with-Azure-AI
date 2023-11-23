@@ -32,3 +32,10 @@ export const analyzeImage = async (imageUrl) => {
     const jsonResponse = await response.json();
     return jsonResponse;
 }
+
+/**
+ * Check if the Azure Computer Vision API Keys are configured
+ */
+export const isConfigured = () => {
+    return process.env.REACT_APP_VISION_KEY && process.env.REACT_APP_VISION_ENDPOINT;
+}
